@@ -22,6 +22,8 @@ h1 {
 }
 input {
   padding: 5px;
+  border: 1px solid #ddd; 
+  border-radius: 4px;
 }
 .upload {
   gap: 20px;
@@ -44,6 +46,7 @@ input[type=file]::file-selector-button:hover {
 }
 input[type=file] {
   color: grey;
+  border: none;
   width: 300px;
 }
 #uploaded-files {
@@ -62,6 +65,21 @@ input[type=file] {
 #uploaded-files li {
   list-style-type: none;
 }
+.options {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.options input:nth-child(-n+4) {
+  width: 80px;
+}
+.options input {
+  width: 150px;
+}
+.options > :nth-last-child(-n+2) {
+  margin-left: auto;
+}
 
 @media screen and (min-width: 768px) {
   main {
@@ -73,5 +91,9 @@ input[type=file] {
   }
   .upload-title label {
     width: 100px;
+  }
+  .options {
+    flex-direction: row;
+    align-items: center;
   }
 }
