@@ -48,6 +48,20 @@ const createSVGSprite = (files, width, height, containerWidth) => {
   return svg;
 }
 
+const downloadSVG = (svgElement, filename) => {
+  const serializer = new XMLSerializer();
+  const svgString = serializer.serializeToString(svgElement);
+  const blob = new Blob([svgString], { type: "image/svg+xml" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  link.click();
+
+  URL.revokeObjectURL(url);
+}
+
 document.getElementById('generate-sprite').addEventListener('click', () => {
   const files = document.getElementById('file-upload').files;
   const width = parseInt(document.getElementById('img-width').value, 10);
@@ -64,9 +78,18 @@ document.getElementById('generate-sprite').addEventListener('click', () => {
   
     spriteDisplay.innerHTML = "";
     spriteDisplay.appendChild(svg);
-  
-    document.getElementById('sprite-name').innerHTML = `Name: <span class="highlight">${prefix ? prefix + `_sprite` : 'sprite'}.svg</span>`;
+
+    const spriteName = `${prefix ? prefix + `_sprite` : 'sprite'}.svg`;
+
+    document.getElementById('sprite-name').innerHTML = `Name: <span class="highlight">${spriteName}</span>`;
     document.getElementById('sprite-size').innerHTML = `Size: <span class="highlight">${getSVGSize(svg)} bytes</span>`;
+
+    const downloadButton = document.getElementById('download-sprite');
+    downloadButton.disabled = false;
+  
+    downloadButton.addEventListener('click', () => {
+        downloadSVG(svg, spriteName);
+    }, { once: true });
   }
       
 });
