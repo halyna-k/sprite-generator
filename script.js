@@ -18,23 +18,26 @@ const getSVGSize = (svgElement) => {
   return blob.size;
 }
 
-const createSVGSprite = (files, width, height, containerWidth) => {
+const createSVGSprite = (files, width, height, containerWidth, padding = 5) => {
   const svgNS = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(svgNS, "svg");
 
-  const iconsPerRow = Math.floor(containerWidth / width);
+  const iconsPerRow = Math.floor((containerWidth + padding) / (width + padding));
   const rows = Math.ceil(files.length / iconsPerRow);
-  
-  svg.setAttribute("width", containerWidth);
-  svg.setAttribute("height", rows * height);
+
+  const totalWidth = iconsPerRow * (width + padding) - padding;
+  const totalHeight = rows * (height + padding) - padding;
+
+  svg.setAttribute("width", totalWidth);
+  svg.setAttribute("height", totalHeight);
 
   Array.from(files).forEach((file, index) => {
       const reader = new FileReader();
       reader.onload = (e) => {
           const image = document.createElementNS(svgNS, "image");
-          const x = (index % iconsPerRow) * width;
-          const y = Math.floor(index / iconsPerRow) * height;
-          
+          const x = (index % iconsPerRow) * (width + padding);
+          const y = Math.floor(index / iconsPerRow) * (height + padding);
+
           image.setAttribute("x", x);
           image.setAttribute("y", y);
           image.setAttribute("width", width);
@@ -46,7 +49,8 @@ const createSVGSprite = (files, width, height, containerWidth) => {
   });
 
   return svg;
-}
+};
+
 
 const downloadSVG = (svgElement, filename) => {
   const serializer = new XMLSerializer();
@@ -79,7 +83,7 @@ document.getElementById('generate-sprite').addEventListener('click', () => {
     spriteDisplay.innerHTML = "";
     spriteDisplay.appendChild(svg);
 
-    const spriteName = `${prefix ? prefix + `_sprite` : 'sprite'}.svg`;
+    const spriteName = `${prefix ? prefix + `_sprite` : `sprite`}.svg`;
 
     document.getElementById('sprite-name').innerHTML = `Name: <span class="highlight">${spriteName}</span>`;
     document.getElementById('sprite-size').innerHTML = `Size: <span class="highlight">${getSVGSize(svg)} bytes</span>`;

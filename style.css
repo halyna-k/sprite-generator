@@ -11,6 +11,7 @@ body, header, nav, h1, h2, h3, h4, h5, h6, p, ul, li, a, button, span, footer {
 }
 * {
   font-family: Poppins, sans-serif;
+  font-size: 0.875rem;
   color: var(--text-color);
 }
 body {
@@ -20,35 +21,36 @@ body {
 }
 main {
   max-width: max-content;
-  padding: 40px 20px;
+  padding: 2.5rem 1.25rem;
   margin: 0 auto;
 }
 h1 {
   text-align: center;
+  font-size: 1.25rem;
 }
 input {
-  padding: 5px;
+  padding: 0.313rem;
   border: 1px solid var(--border-color); 
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }
 button {
-  padding: 10px 20px;
+  padding: 0.625rem 1.25rem;
   border: none; 
   background-color: var(--accent-color);
   color: var(--hover-text-color);
-  border-radius: 4px;
+  border-radius: 0.25rem;
   cursor: pointer;
-  margin: 20px 0;
+  margin: 1.25rem 0;
 }
 button:disabled {
   background-color: #cccccc;
   cursor: not-allowed; 
 }
 .upload {
-  gap: 20px;
+  gap: 1.25rem;
 }
 .upload-title {
-  margin-top: 20px;
+  margin-top: 1.25rem;
   display: flex;
   align-items: center;
 }
@@ -56,47 +58,50 @@ button:disabled {
   width: 200px;
 }
 input[type=file]::file-selector-button {
-  padding: 5px;
+  padding: 0.313rem;
   cursor: pointer;
 }
 input[type=file]::file-selector-button:hover {
   color: var(--hover-text-color);
   background-color: var(--accent-color);
   border: 2px solid var(--accent-color);
-  border-radius: 3px;
+  border-radius: 0.188rem;
 }
 input[type=file] {
+  width: 300px;
   color: grey;
   border: none;
-  width: 300px;
 }
 #uploaded-files {
   min-height: 200px;
-  padding: 10px;
-  margin-top: 10px;
+  padding: 0.625rem;
+  margin-top: 0.625rem;
   background-color: var(--hover-text-color); 
   border: 1px solid var(--border-color); 
-  border-radius: 4px; 
+  border-radius: 0.25rem; 
 }
 #uploaded-files ul {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 5px;
+  gap: 0.313rem;
 }
 #uploaded-files li {
   list-style-type: none;
 }
 .options {
-  margin-top: 20px;
+  margin-top: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.625rem;
 }
 .options input:nth-child(-n+4) {
   width: 80px;
 }
 .options input {
   width: 150px;
+}
+.options input::placeholder {
+  font-size: smaller;
 }
 .options input:active {
   border: 1px solid var(--accent-color); 
@@ -110,26 +115,33 @@ input[type=file] {
 .buttons-group {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 0.625rem;
 }
 #sprite-display {
   min-height: 200px;
-  padding: 10px; 
+  padding: 0.625rem; 
   background-color: white; 
   border: 1px solid #ddd; 
-  border-radius: 4px; 
+  border-radius: 0.25rem; 
+  overflow: auto;
 }
 
 @media screen and (min-width: 768px) {
+  * {
+    font-size: 1rem;
+  }
   main {
     max-width: 1024px;
-    padding: 60px 40px;
+    padding: 3.75rem 2.5rem;
+  }
+  h1 {
+    font-size: 1.5rem;
   }
   .upload-title {
-    gap: 20px;
+    gap: 1.25rem;
   }
   .upload-title label {
-    width: 100px;
+    width: 6.25rem;
   }
   .options {
     flex-direction: row;
